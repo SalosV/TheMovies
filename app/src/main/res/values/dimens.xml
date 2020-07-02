@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="border_card">8dp</dimen>
+    <dimen name="card_radius">8dp</dimen>
+    <dimen name="card_elevation">8dp</dimen>
+    <dimen name="card_height">190dp</dimen>
+    <dimen name="card_height_footer">32dp</dimen>
+    <dimen name="card_footer_padding">4dp</dimen>
+    <dimen name="card_title">17sp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="detail_movie_margin_image">16dp</dimen>
+    <dimen name="detail_card_width">130dp</dimen>
+    <dimen name="detail_card_height">200dp</dimen>
+    <dimen name="detail_toolbar_height">180dp</dimen>
+    <dimen name="detail_title">17sp</dimen>
+    <dimen name="title">19sp</dimen>
+</resources>
