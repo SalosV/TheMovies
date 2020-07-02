@@ -7,21 +7,20 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
-import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.santiagolozada.themovies.R
 import com.santiagolozada.themovies.databinding.FragmentListBinding
 import com.santiagolozada.themovies.presentations.NavHostActivity
+import com.santiagolozada.themovies.presentations.commonts.FilterDialog
+import com.santiagolozada.themovies.presentations.commonts.FilterDialog.SelectItemListener
 import com.santiagolozada.themovies.presentations.movies.detail.DetailMovieActivity
 import com.santiagolozada.themovies.presentations.movies.main.MoviesState.ListMovies
 import com.santiagolozada.themovies.presentations.movies.main.MoviesState.Loading
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ListMoviesFragment : Fragment() {
+class ListMoviesFragment : Fragment(), SelectItemListener {
 
     private val listMoviesViewModel: ListMoviesViewModel by viewModel()
     private lateinit var navHostActivity: NavHostActivity
@@ -47,13 +46,20 @@ class ListMoviesFragment : Fragment() {
             false
         )
 
+        observables()
+        onClicks()
+
+        listMoviesViewModel.getMoviesPopular()
+
         binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        observables()
+    private fun onClicks() {
+        binding.filter.setOnClickListener {
+            val fm = this.childFragmentManager
+            val searchDialog = FilterDialog()
+            searchDialog.show(fm, "fragment_filter")
+        }
     }
 
     private fun initRecycler() {
@@ -93,13 +99,15 @@ class ListMoviesFragment : Fragment() {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        listMoviesViewModel.getMoviesPopular()
-    }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         navHostActivity = context as NavHostActivity
+    }
+
+    override fun selectItem(item: String) {
+        when (item) {
+            getString(R.string.populary) -> listMoviesViewModel.getMoviesPopular()
+            getString(R.string.top_rated) -> listMoviesViewModel.getMoviesTopRated()
+        }
     }
 }

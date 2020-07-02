@@ -7,4 +7,7 @@ class ListMoviesUseCase(
 ) {
     suspend fun getMoviesPopular() =
         listMoviesRepository.getMoviesPopular()
+
+    suspend fun getMoviesTopRated() =
+        listMoviesRepository.getMoviesTopRated()
 }

@@ -16,6 +16,13 @@ interface ServiceApi {
         @Query("page") limit: Int
     ): Response<Movie>
 
+    @GET("/3/movie/top_rated")
+    suspend fun getMoviesTopRated(
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String,
+        @Query("page") limit: Int
+    ): Response<Movie>
+
     @GET("/3/movie/{movieId}")
     suspend fun getDetailMovie(
         @Path("movieId") movieId: Int,
